@@ -12,7 +12,7 @@ const useStore = create((set) => ({
   updateAddress: (index, newAddress) =>
     set((state) => ({
       users: state.users.map((user, i) =>
-        i === index ? { ...user, ...newAddress } : user
+        i === index ? { ...user, location: { ...user.location, ...newAddress } } : user
       ),
     })),
 }));

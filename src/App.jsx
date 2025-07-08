@@ -1,29 +1,30 @@
 import { useState } from 'react'
 import "./App.css";
-import "bootswatch/dist/vapor/bootstrap.min.css";
+import "bootswatch/dist/morph/bootstrap.min.css";
 import useStore from "./store/useStore";
-import { randomUserAPI } from "./data";
-const users = randomUserAPI.results;
 // Main App component
 export default function App() {
   const { users, updateUser, updateAddress } = useStore();
   const [selectedUserId, setSelectedUserId] = useState(0);
   const [firstName, setFirstName] = useState(users[selectedUserId].name.first);
   const [lastName, setLastName] = useState(users[selectedUserId].name.last);
-  const [age, setAge] = useState(users[selectedUserId].age);
+  const [age, setAge] = useState(users[selectedUserId].dob.age);
   const [street, setStreet] = useState(users[selectedUserId].location.street.name);
   const [city, setCity] = useState(users[selectedUserId].location.city);
   const [streetNumber, setStreetNumber] = useState(users[selectedUserId].location.street.number);
   const handleUserUpdate = (e) => {
     e.preventDefault();
     console.log( firstName, lastName, age );
-    updateUser(selectedUserId, { name: { first: firstName, last: lastName }, age: Number(age) });
+    updateUser(Number(selectedUserId), { 
+      name: { first: firstName, last: lastName }, 
+      dob: { ...users[selectedUserId].dob, age: Number(age) } 
+    });
   };
 
   const handleAddressUpdate = (e) => {
     e.preventDefault();
     console.log( street, streetNumber, city );
-    updateAddress(selectedUserId, { street: { name: street, number: streetNumber }, city });
+    updateAddress(Number(selectedUserId), { street: { name: street, number: streetNumber }, city });
   };
 
   return (
@@ -35,7 +36,7 @@ export default function App() {
         className="form-select"
         value={selectedUserId}
         onChange={(e) => {
-          const index = e.target.value;
+          const index = Number(e.target.value);
           setSelectedUserId(index);
           setFirstName(users[index].name.first);
           setLastName(users[index].name.last);
