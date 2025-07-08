@@ -3,6 +3,9 @@ import "./App.css";
 import "bootswatch/dist/quartz/bootstrap.min.css";
 import useStore from "./store/useStore";
 import SelectUser from "./components/SelectUser";
+import UpdateUserForm from "./components/UpdateUserForm";
+import UpdateAddressForm from "./components/UpdateAddressForm";
+import CurrentUser from "./components/CurrentUser";
 // Main App component
 export default function App() {
   const { users, updateUser, updateAddress } = useStore();
@@ -36,94 +39,19 @@ export default function App() {
   return (
     <>
       <SelectUser
-        users={users}
         selectedUserId={selectedUserId}
         setSelectedUserId={setSelectedUserId}
         setFormData={setFormData}
       />
       <div className="mini" style={{ padding: "1rem" }}>
         <div className="d-flex gap-1">
-          <div className="card p-1 gap-1" style={{ marginBottom: "1rem" }}>
-            <input
-              className="form-control form-control-sm"
-              type="text"
-              placeholder="Name"
-              value={formData.firstName}
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
-            />
-            <input
-              className="form-control form-control-sm"
-              type="text"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
-            />
-            <input
-              className="form-control form-control-sm"
-              type="number"
-              placeholder="Age"
-              value={formData.age || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, age: e.target.value })
-              }
-            />
-            <button
-              className="btn btn-primary btn-block w-100"
-              onClick={handleUserUpdate}
-              type="submit"
-            >
-              Update User
-            </button>
-          </div>
-
-          <div className="card p-1 gap-1" style={{ marginBottom: "1rem" }}>
-            <input
-              className="form-control form-control-sm"
-              type="text"
-              placeholder="Street"
-              value={formData.street}
-              onChange={(e) =>
-                setFormData({ ...formData, street: e.target.value })
-              }
-            />
-            <input
-              className="form-control form-control-sm"
-              type="text"
-              placeholder="Street Number"
-              value={formData.streetNumber}
-              onChange={(e) =>
-                setFormData({ ...formData, streetNumber: e.target.value })
-              }
-            />
-            <input
-              className="form-control form-control-sm"
-              type="text"
-              placeholder="City"
-              value={formData.city}
-              onChange={(e) =>
-                setFormData({ ...formData, city: e.target.value })
-              }
-            />
-            <button
-              className="btn btn-primary btn-block w-100"
-              onClick={handleAddressUpdate}
-              type="submit"
-            >
-              Update Address
-            </button>
-          </div>
+          
+          <UpdateUserForm formData={formData} setFormData={setFormData} handleUserUpdate={handleUserUpdate} />
+          
+          <UpdateAddressForm formData={formData} setFormData={setFormData} handleAddressUpdate={handleAddressUpdate} />   
         </div>
 
-        <div className="card p-2">
-          <h6 className="text-muted border-bottom mb-0">
-            Current User (randomuser.me/API)
-          </h6>
-          <pre>{JSON.stringify(users[selectedUserId], null, 2)}</pre>
-        </div>
+        <CurrentUser selectedUserId={selectedUserId} />
       </div>
     </>
   );
