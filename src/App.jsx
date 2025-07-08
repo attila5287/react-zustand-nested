@@ -35,12 +35,12 @@ export default function App() {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-0">
-        <div className="d-flex gap-1 mini py-0">
+        <div className="d-flex gap-1 mini py-0 my-1">
           <a className="navbar-brand" href="https://zustand.docs.pmnd.rs/ ">
-            <i className="fa fa-search"></i> Zustand
+            <img src={users[selectedUserId].picture.thumbnail} alt="Zustand" className="img-fluid" style={{ width: "70px" }} />
           </a>
           <select
-            className="form-select w-100"
+            className="form-select w-100 py-0"
             value={selectedUserId}
             onChange={(e) => {
               const index = Number(e.target.value);
