@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import "bootswatch/dist/quartz/bootstrap.min.css";
 import useStore from "./store/useStore";
+import SelectUser from "./components/SelectUser";
 // Main App component
 export default function App() {
   const { users, updateUser, updateAddress } = useStore();
@@ -34,36 +35,12 @@ export default function App() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-0">
-        <div className="d-flex gap-1 mini py-0 my-1">
-          <a className="navbar-brand" href="https://zustand.docs.pmnd.rs/ ">
-            <img src={users[selectedUserId].picture.thumbnail} alt="Zustand" className="img-fluid" style={{ width: "70px" }} />
-          </a>
-          <select
-            className="form-select w-100 py-0"
-            value={selectedUserId}
-            onChange={(e) => {
-              const index = Number(e.target.value);
-              setSelectedUserId(index);
-              setFormData({
-                firstName: users[index].name.first,
-                lastName: users[index].name.last,
-                age: users[index].dob.age || "",
-                street: users[index].location.street.name,
-                city: users[index].location.city,
-                streetNumber: users[index].location.street.number,
-              });
-            }}
-          >
-            {users.map((user, index) => (
-              <option key={"user" + index} value={index}>
-                {index} - {user.name.first} {user.name.last}
-              </option>
-            ))}
-          </select>
-        </div>
-      </nav>
-
+      <SelectUser
+        users={users}
+        selectedUserId={selectedUserId}
+        setSelectedUserId={setSelectedUserId}
+        setFormData={setFormData}
+      />
       <div className="mini" style={{ padding: "1rem" }}>
         <div className="d-flex gap-1">
           <div className="card p-1 gap-1" style={{ marginBottom: "1rem" }}>
