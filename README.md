@@ -1,12 +1,17 @@
 # REACT - Zustand - Nested State Management
 
-https://react-zustand-nested.vercel.app
+    Zustand is a REACT state management tool like redux but much easier, here the objective was to work with nested objects.
 
-https://refine.dev/blog/zustand-react-state/#managing-state-structures
+|--|--|
+|--|--|
+| See live demo on vercel: | https://react-zustand-nested.vercel.app |
+| See code on github | https://www.github.com/attila5287/react-zustand-nested |
+| See Zustand documentation | https://refine.dev/blog/zustand-react-state/#managing-state-structures |
+ 
+ >   Note: the example had a single user as its state, modified it to users array and pulled data from randomuser.me/api so it was mostly like merging two examples from documentation, todo app and nested state structure. Please notice the nested object (from random user API) 
 
-    Note: the example had a single user as its state, modified it to users array and pulled data from randomuser.me/api
+<img src="./src/assets/Screenshot.png" width="300">
 
-    The objective here was to use a nested state structure with Zustand
 
 ## 📊 Component Analysis
 
