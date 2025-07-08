@@ -1,22 +1,19 @@
-import { create } from 'zustand'
-
+import { create } from "zustand";
+import { randomUserAPI } from "../data";
+const users = randomUserAPI.results;
 const useStore = create((set) => ({
-  user: {
-    name: "",
-    age: 0,
-    address: {
-      street: "",
-      city: "",
-    },
-  },
-  updateUser: (newUser) =>
-    set((state) => ({ user: { ...state.user, ...newUser } })),
-  updateAddress: (newAddress) =>
+ users: users,
+  updateUser: (index, newUser) =>
     set((state) => ({
-      user: {
-        ...state.user,
-        address: { ...state.user.address, ...newAddress },
-      },
+      users: state.users.map((user, i) =>
+        i === index ? { ...user, ...newUser } : user
+      ),
+    })),
+  updateAddress: (index, newAddress) =>
+    set((state) => ({
+      users: state.users.map((user, i) =>
+        i === index ? { ...user, ...newAddress } : user
+      ),
     })),
 }));
 
